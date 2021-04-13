@@ -5,45 +5,7 @@ import datetime as dt
 import time
 import numpy as np
 import multiprocessing as mp
-import astropy_example
-
-def antenna_puller(antenna_data_csv,antenna_number):
-    ant_data_raw = pd.read_csv(antenna_data_csv)
-    ant_data_raw = pd.read_csv(antenna_data_csv)
-    ant_data_raw['time']= pd.to_datetime(ant_data_raw['time'])
-    antenna_data = ant_data_raw[ant_data_raw['antenna'] == antenna_number].copy()
-    return antenna_data
-
-def comparison_loop(gps_sub_data):
-    for m  in range(len(ant_matrix['time'])):
-        for n in range(len(gps_sub_data['time'])):
-            t1 =  ant_matrix['time'][m].to_pydatetime().timestamp()
-            t2 = gps_sub_data['time'][n].to_pydatetime().timestamp()
-            time_difference = t1 - t2
-            if time_difference == 0: 
-                print('hello world') 
-                
-def latlong_of_detections_creator(gps_data, antenna_data):
-    lat_long_of_detects = pd.DataFrame([])
-    global ant_matrix 
-    ant_matrix = antenna_data
-    #break the data into chunks and then run multithreaded
-    print(mp.cpu_count())
-    #gps_split = np.array_split(gps_data,mp.cpu_count()) 
-    print('split complete')
-    a_pool = mp.Pool(mp.cpu_count())
-    print('pool complete')
-    #print(gps_split)
-    #pool_res = [mp.Process]a_pool.map(comparison_loop,gps_split)
-    #for ii, chunk in enumerate(gps_split)
-    presult = astropy_example.parallel_map(comparison_loop, gps_data)
-    
-    a_pool.close()
-    a_pool.join()
-   # with ProcessPoolExecutor() as executor:
-   #     res = executor.map(comparison_loop,gps_split) 
-        
-    return lat_long_of_detects
+import final_proj_functions as fpf
 
 gps_data_csv = 'apr7_data.csv'
 
@@ -56,15 +18,15 @@ gps_data_sorted['time']= pd.to_datetime(gps_data_sorted['time'])
 
 antenna_data_csv = 'apr7_tag.csv'
 
-antenna_1_data = antenna_puller(antenna_data_csv,1)
-antenna_2_data = antenna_puller(antenna_data_csv,2)
-antenna_3_data = antenna_puller(antenna_data_csv,3)
-antenna_4_data = antenna_puller(antenna_data_csv,4)
-antenna_5_data = antenna_puller(antenna_data_csv,5)
+antenna_1_data = fpf.antenna_puller(antenna_data_csv,1)
+antenna_2_data = fpf.antenna_puller(antenna_data_csv,2)
+antenna_3_data = fpf.antenna_puller(antenna_data_csv,3)
+antenna_4_data = fpf.antenna_puller(antenna_data_csv,4)
+antenna_5_data = fpf.antenna_puller(antenna_data_csv,5)
 
 #print(antenna_1_data)
 
-lat_long_of_detections_1 = latlong_of_detections_creator(gps_data_sorted, antenna_1_data)
+lat_long_of_detections_1 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_1_data)
 #lat_long_of_detections_2 = latlong_of_detections_creator(gps_data_sorted, antenna_2_data)
 #lat_long_of_detections_3 = latlong_of_detections_creator(gps_data_sorted, antenna_3_data)
 #lat_long_of_detections_4 = latlong_of_detections_creator(gps_data_sorted, antenna_4_data)

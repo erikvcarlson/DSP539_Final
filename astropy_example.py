@@ -59,7 +59,7 @@ def run_tasks(procs, err_q, out_q, num):
   # function to terminate processes that are still running.
   die = (lambda vals : [val.terminate() for val in vals
              if val.exitcode is None])
-
+  print(procs)
   try:
     for proc in procs:
       proc.start()
@@ -73,7 +73,7 @@ def run_tasks(procs, err_q, out_q, num):
     raise e
 
   if not err_q.empty():
-    # kill all on any exception from any one slave
+    kill all on any exception from any one slave
     die(procs)
     raise err_q.get()
 
