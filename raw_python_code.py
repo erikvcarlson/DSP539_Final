@@ -30,20 +30,20 @@ antenna_4_data = fpf.antenna_puller(antenna_data_csv,4)
 antenna_5_data = fpf.antenna_puller(antenna_data_csv,5)
 
 lat_long_of_detections_1 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_1_data)
-#lat_long_of_detections_2 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_2_data)
-#lat_long_of_detections_3 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_3_data)
-#lat_long_of_detections_4 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_4_data)
-#lat_long_of_detections_5 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_5_data)
+lat_long_of_detections_2 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_2_data)
+lat_long_of_detections_3 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_3_data)
+lat_long_of_detections_4 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_4_data)
+lat_long_of_detections_5 = fpf.latlong_of_detections_creator(gps_data_sorted, antenna_5_data)
 
 
 station_location = [41.520752667,-71.599254667,40.0];
 station_offset = navpy.lla2ecef(station_location[0],station_location[1],station_location[2])
 
 ant1_xyz = fpf.xyz_converter(station_location,station_offset,lat_long_of_detections_1)
-#ant2_xyz = fpf.xyz_converter(station_location,station_offset,lat_long_of_detections_2)
-#ant3_xyz = fpf.xyz_converter(station_location,station_offset,lat_long_of_detections_3)
-#ant4_xyz = fpf.xyz_converter(station_location,station_offset,lat_long_of_detections_4)
-#ant5_xyz = fpf.xyz_converter(station_location,station_offset,lat_long_of_detections_5)    
+ant2_xyz = fpf.xyz_converter(station_location,station_offset,lat_long_of_detections_2)
+ant3_xyz = fpf.xyz_converter(station_location,station_offset,lat_long_of_detections_3)
+ant4_xyz = fpf.xyz_converter(station_location,station_offset,lat_long_of_detections_4)
+ant5_xyz = fpf.xyz_converter(station_location,station_offset,lat_long_of_detections_5)    
 
 #print(ant1_xyz)
 x_1 = []
