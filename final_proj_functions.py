@@ -7,7 +7,7 @@ import numpy as np
 import multiprocessing as mp
 import navpy 
 import math as m
-
+from Bezier import Bezier
 
 def antenna_puller(antenna_data_csv,antenna_number):
     ant_data_raw = pd.read_csv(antenna_data_csv)
@@ -72,3 +72,19 @@ def cart2sph(x,y,z):
     elev = m.atan2(z,m.sqrt(XsqPlusYsq))     # theta
     az = m.atan2(y,x)                           # phi
     return r, elev, az
+
+def dbm_to_curve(rssi, points):
+    control_points = []
+    for n in range(0,len(points)):
+        if points[n][3] == rssi:
+            control_points.append(points[n])
+    if len(control_points) < 3:
+        control_points = [[1,0,0],[0,1,0],[0,0,1]]
+    control_points.append(control_points[0])
+    #potentially need to sort data so close points are adjacent data points are next to each other+
+    points_set_1 = np.array(control_points)
+    t_points = np.arange(0, 1, 0.0005)
+    power_curve = Bezier.Curve(t_points, points_set_1)
+    
+
+    return power_curve
