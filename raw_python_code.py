@@ -9,7 +9,7 @@ import final_proj_functions as fpf
 import navpy 
 import matplotlib.pyplot as plt
 import csv
-
+import convert_data_for_BRI as cdfB
 
 startTime = time.time()
 
@@ -89,7 +89,7 @@ fig = plt.figure()
 #plt.savefig('bar.png', bbox_inches='tight')
 
 
-curve_set_1 = fpf.dbm_to_curve(-40, ant1_xyz)
+curve_set_1 = cdfB.dbm_to_curve(-100, ant1_xyz)
 #print(len(ans))
 
 ax = fig.add_subplot(projection='3d')
