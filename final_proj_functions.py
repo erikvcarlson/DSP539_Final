@@ -147,5 +147,7 @@ def lat_long_converter(xyz_positions,new_station_location):
     station_offset = navpy.lla2ecef(new_station_location[0],new_station_location[1],new_station_location[2])
     lat_long_location = []
     for i in range(len(xyz_positions)):
-        lat_long_location.append(navpy.ecef2lla(ant1_xyz[1][0:3] + station_offset)
+        lat_long_location.append(navpy.ecef2lla(xyz_positions[i][0:3] + station_offset))
     return lat_long_location
+
+
