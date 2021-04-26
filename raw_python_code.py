@@ -84,8 +84,8 @@ df.to_csv('calibration_data.csv',index = False)
 #plt.savefig('foo.png', bbox_inches='tight')
 
 fig = plt.figure()
-#ax = fig.add_subplot(111, polar=True)
-#ax.plot(spherical_coordinates_az,spherical_coordinates_radius,'o')
+ax = fig.add_subplot(111, polar=True)
+ax.plot(spherical_coordinates_az,spherical_coordinates_radius,'o')
 #plt.savefig('bar.png', bbox_inches='tight')
 
 
